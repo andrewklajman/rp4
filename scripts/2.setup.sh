@@ -1,7 +1,7 @@
 # Install required applications
     apt -y update
     apt -y upgrade
-    apt-get -y install ranger neovim curl man doas htop ncdu
+    apt-get -y install ranger neovim curl man doas htop ncdu yt-dlp
 
 # Setup doas
 	echo "permit setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :root" > /etc/doas.conf
