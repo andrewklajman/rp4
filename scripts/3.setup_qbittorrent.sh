@@ -7,7 +7,7 @@
     	--create-home \
     	--shell /bin/bash \
     	--password $(echo password | openssl passwd -1 -stdin) \
-		--groups mnt_access
+		--groups mnt_access \
     	torrent
 
 # Install qbittorrent_nox
@@ -26,8 +26,8 @@
 # Create folders
     mkdir /mnt/qbittorrent-nox
     mkdir /mnt/qbittorrent-nox/incomplete_torrent
-	chmod -R root:mnt_access /mnt
-	chown -R 774 /mnt
+	chmod -R 774 /mnt
+	chown -R root:mnt_access /mnt
 
 # Setup auto run
 	echo "
