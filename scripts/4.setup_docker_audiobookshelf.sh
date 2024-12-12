@@ -6,7 +6,7 @@
     mkdir /mnt/audiobookshelf/config
 
 # Load configuration settings
-    tar -xvf ./files/audiobookshelf_config.tar
+    tar -xvf ../files/audiobookshelf_config.tar.gz
 	mv ./config /mnt/audiobookshelf/
 
 # Create AudioBookShelf container
@@ -23,9 +23,11 @@
           - /mnt/audiobookshelf/config:/config
         restart: unless-stopped
     " > /mnt/audiobookshelf/docker-compose.yml
-	chmod -R root:mnt_access /mnt
-	chown -R 774 /mnt
+	chmod -R 775 /mnt
+	chown -R root:mnt_access /mnt
 
 # Run AudioBookShelf
     cd /mnt/audiobookshelf
     docker-compose up -d
+
+reboot

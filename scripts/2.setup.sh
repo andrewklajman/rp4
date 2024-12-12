@@ -1,7 +1,7 @@
 # Install required applications
     apt -y update
     apt -y upgrade
-    apt-get -y install ranger neovim curl man doas
+    apt-get -y install ranger neovim curl man doas htop ncdu
 
 # Setup doas
 	echo "permit setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :root" > /etc/doas.conf
@@ -23,7 +23,7 @@
 
 # Setup mnt access
     groupadd mnt_access
-	chmod -R 774 /mnt
+	chmod -R 775 /mnt
 	chown -R root:mnt_access /mnt
 
 # Download and run get-docker script

@@ -1,4 +1,4 @@
-IMAGE="../files/raspi_4_bookworm.img.xz"
+IMAGE="../raspi_4_bookworm.img.xz"
 
 # Extract the image to device
 	lsblk
