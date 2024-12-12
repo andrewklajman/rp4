@@ -9,6 +9,11 @@
 # Install NordVpn
 	sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh | sed 's/ASSUME_YES=false/ASSUME_YES=true/g')
 
+	nordvpn login
+	echo -n "Please enter callback url: "
+	read CALLBACK_URL
+	nordvpn login --callback "$CALLBACK_URL"
+
     nordvpn whitelist add subnet 192.168.0.1/24
     nordvpn set killswitch on
     nordvpn set autoconnect on
@@ -18,8 +23,8 @@
 
 # Setup mnt access
     groupadd mnt_access
-	chmod -R root:mnt_access /mnt
-	chown -R 774 /mnt
+	chmod -R 774 /mnt
+	chown -R root:mnt_access /mnt
 
 # Download and run get-docker script
     curl -fsSL https://get.docker.com -o get-docker.sh
