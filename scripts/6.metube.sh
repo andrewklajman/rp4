@@ -1,4 +1,4 @@
-LOG=$(date +/root/%F_installation.log)
+LOG=$(date +/root/log/%F_installation.log)
 echo "--- MeTube ---" | tee --append $LOG
 echo "Notes:
   - Browser extension: Right mouse click video to sent to MeTube

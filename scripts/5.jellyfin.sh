@@ -2,7 +2,7 @@
 #   - http://192.168.0.214:8096/web/
 #   - Credentials: jellyfin, jellyfin
 
-LOG=$(date +./%F_installation.log)
+LOG=$(date +/root/log/%F_installation.log)
 
 echo "--- Jellyfin ---" | tee --append $LOG
 

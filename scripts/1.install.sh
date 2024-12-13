@@ -42,6 +42,7 @@ IMAGE="../raspi_4_bookworm.img.xz"
 # Copy setup.sh
     cp -r ../files/ /tmp/raspi/root
     cp -r ../scripts/ /tmp/raspi/root
+	mkdir /tmp/raspi/root/log
 
 # Umount image
 	umount /tmp/raspi

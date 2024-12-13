@@ -1,12 +1,14 @@
-# Install required applications
+LOG=$(date +/root/log/%F_installation.log)
+
+echo "Install required applications" | tee --append $LOG
     apt -y update
     apt -y upgrade
     apt-get -y install ranger neovim curl man doas htop ncdu yt-dlp
 
-# Setup doas
+echo "Setup doas" | tee --append $LOG
 	echo "permit setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :root" > /etc/doas.conf
 
-# Install NordVpn
+# Install NordVpn" | tee --append $LOG
 	sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh | sed 's/ASSUME_YES=false/ASSUME_YES=true/g')
 
 	nordvpn login
@@ -21,14 +23,15 @@
 	nordvpn c switzerland
 	nordvpn status
 
-# Setup mnt access
+echo "Setup mnt access" | tee --append $LOG
     groupadd mnt_access
 	chmod -R 775 /mnt
 	chown -R root:mnt_access /mnt
 
-# Download and run get-docker script
+echo "Download and run get-docker script" | tee --append $LOG
     curl -fsSL https://get.docker.com -o get-docker.sh
     bash get-docker.sh
 	rm get-docker.sh
 	apt-get install -y docker-compose
     docker run hello-world
+	docker run --detach --name watchtower --volume /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower

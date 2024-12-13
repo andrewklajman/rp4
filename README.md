@@ -1,8 +1,9 @@
 I would like to add the following
-- Metube: Watchtower
-- Metube: Bookmarklet
 - SSL Certificates
+- Metube: Bookmarklet
 - Git repository
+- Pi DNS Server
+- Remote Browser
 
 
 Maybe
