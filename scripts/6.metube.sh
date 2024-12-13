@@ -20,6 +20,11 @@ services:
       - "8081:8081"
     volumes:
       - /mnt/metube/downloads:/downloads
+      - /mnt/metube/ssl:/mnt/ssl
+    environment:
+      - HTTPS=true
+      - CERTFILE=/ssl/cert.csr
+      - KEYFILE=/ssl/ssl.key
 " > /mnt/metube/docker-compose.yml
 
 echo " - Creating link to Jellyfin"  | tee --append $LOG

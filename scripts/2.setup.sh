@@ -24,9 +24,16 @@ echo "Setup doas" | tee --append $LOG
 	nordvpn status
 
 echo "Setup mnt access" | tee --append $LOG
-    groupadd mnt_access
-	chmod -R 775 /mnt
-	chown -R root:mnt_access /mnt
+groupadd mnt_access
+
+echo "Create SSL Certificate" | tee --append $LOG
+mkdir /mnt/ssl
+openssl req -nodes -newkey rsa:2048 \
+	-keyout /mnt/ssl/ssl.key \
+	-out /mnt/ssl/cert.csr \
+	-subj "/C=AU/ST=Sydney/L=Sydney/O=Global Security/OU=IT Department/CN=andrewklajman.com"
+chmod -R 775 /mnt
+chown -R root:mnt_access /mnt
 
 echo "Download and run get-docker script" | tee --append $LOG
     curl -fsSL https://get.docker.com -o get-docker.sh
