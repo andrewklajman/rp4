@@ -1,15 +1,15 @@
-LOG=$(date +/root/log/%F_installation.log)
-echo "--- MeTube ---" | tee --append $LOG
-echo "Notes:
-  - Browser extension: Right mouse click video to sent to MeTube
-  - https://github.com/containrrr/watchtower: recommended to overcome updated container images " | tee --append $LOG
+echo "# 6.metube.sh"
+echo " - DISPLAY: $DISPLAY"
 
-echo "Installation:" | tee --append $LOG
-echo " - Creating folders" | tee --append $LOG
+echo "## Notes:
+  - Browser extension: Right mouse click video to sent to MeTube
+  - https://github.com/containrrr/watchtower: recommended to overcome updated container images "
+
+echo "## Creating folders"
 mkdir /mnt/metube
 mkdir /mnt/metube/downloads
 
-echo " - Creating container"  |tee --append $LOG
+echo "## Creating container"
 echo "
 services:
   metube:
@@ -27,17 +27,15 @@ services:
       - KEYFILE=/ssl/ssl.key
 " > /mnt/metube/docker-compose.yml
 
-echo " - Creating link to Jellyfin"  | tee --append $LOG
+echo "## Creating link to Jellyfin" 
 if [ -d "/mnt/jellyfin" ]; then
 	ln -s /mnt/metube/downloads /mnt/jellyfin/metube
 fi
 chmod -R 775 /mnt
 chown -R root:mnt_access /mnt
 
-echo " - Running container"  |tee --append $LOG
+echo "## Running container"
     cd /mnt/metube
-    docker-compose up -d | tee --append $LOG
-
-echo "" | tee --append $LOG
+    docker-compose up -d
 
 reboot

@@ -1,9 +1,9 @@
 I would like to add the following
-- Git repository
-- Pi DNS Server
 - Remote Browser
 
 Maybe
+- Git repository
+- Pi DNS Server
 - NginX Reverse Proxy
 - Tailscale
 - Calibre

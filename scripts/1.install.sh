@@ -25,8 +25,11 @@ IMAGE="../raspi_4_bookworm.img.xz"
 	update_config=1
 	ctrl_interface=DIR=/run/wpa_supplicant GROUP=netdev" >> /tmp/raspi/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 
-# SSH: Allow root login
+# SSH: Update config
 	echo "PermitRootLogin yes" >> /tmp/raspi/etc/ssh/sshd_config
+	sed 's/#Compression.*/Compression yes/g' /tmp/raspi/etc/ssh/sshd_config > /tmp/raspi/etc/ssh/sshd_config_modified
+	mv /tmp/raspi/etc/ssh/sshd_config_modified /tmp/raspi/etc/ssh/sshd_config
+#apt-get -y install x2go-server
 
 # SSH: Copy across public ssh key
 	echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjb+t7vMFkoKa1q/RNrFtrp7RPcAgZLXC6WHIBIQL93 andrew@lenovo" >> /tmp/raspi/root/.ssh/authorized_keys
@@ -40,10 +43,11 @@ IMAGE="../raspi_4_bookworm.img.xz"
 	echo "rp4" > /tmp/raspi/etc/hostname
 
 # Copy setup.sh
-    cp -r ../files/ /tmp/raspi/root
-    cp -r ../scripts/ /tmp/raspi/root
-	mkdir /tmp/raspi/root/log
+cp -r ../files/ /tmp/raspi/root
+cp -r ../scripts/ /tmp/raspi/root
+mkdir /tmp/raspi/root/log
 
 # Umount image
-	umount /tmp/raspi
-	rmdir /tmp/raspi
+umount /tmp/raspi
+sleep 2
+rmdir /tmp/raspi

@@ -1,33 +1,36 @@
-# Create folders
-    mkdir /mnt/audiobookshelf
-    mkdir /mnt/audiobookshelf/audiobooks
-    mkdir /mnt/audiobookshelf/podcasts
-    mkdir /mnt/audiobookshelf/metadata
-    mkdir /mnt/audiobookshelf/config
+echo "# 4.audiobookshelf.sh"
+echo " - DISPLAY: $DISPLAY"
 
-# Load configuration settings
-    tar -xvf ../files/audiobookshelf_config.tar.gz
-	mv ./config /mnt/audiobookshelf/
+echo "## Create folders"
+mkdir /mnt/audiobookshelf
+mkdir /mnt/audiobookshelf/audiobooks
+mkdir /mnt/audiobookshelf/podcasts
+mkdir /mnt/audiobookshelf/metadata
+mkdir /mnt/audiobookshelf/config
 
-# Create AudioBookShelf container
-    echo "
-    services:
-      audiobookshelf:
-        image: ghcr.io/advplyr/audiobookshelf:latest
-        ports:
-          - 13378:80
-        volumes:
-          - /mnt/audiobookshelf/audiobooks:/audiobooks
-          - /mnt/audiobookshelf/podcasts:/podcasts
-          - /mnt/audiobookshelf/metadata:/metadata
-          - /mnt/audiobookshelf/config:/config
-        restart: unless-stopped
-    " > /mnt/audiobookshelf/docker-compose.yml
-	chmod -R 775 /mnt
-	chown -R root:mnt_access /mnt
+echo "## Load configuration settings"
+tar -xvf ../files/audiobookshelf_config.tar.gz
+mv ./config /mnt/audiobookshelf/
 
-# Run AudioBookShelf
-    cd /mnt/audiobookshelf
-    docker-compose up -d
+echo "## Create AudioBookShelf container"
+echo "
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - 13378:80
+    volumes:
+      - /mnt/audiobookshelf/audiobooks:/audiobooks
+      - /mnt/audiobookshelf/podcasts:/podcasts
+      - /mnt/audiobookshelf/metadata:/metadata
+      - /mnt/audiobookshelf/config:/config
+    restart: unless-stopped
+" > /mnt/audiobookshelf/docker-compose.yml
+chmod -R 775 /mnt
+chown -R root:mnt_access /mnt
+
+echo "## Run AudioBookShelf"
+cd /mnt/audiobookshelf
+docker-compose up -d
 
 reboot
