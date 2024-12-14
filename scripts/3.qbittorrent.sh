@@ -57,4 +57,5 @@ WantedBy=default.target" > /etc/systemd/system/qbittorrent-nox.service
 
 systemctl --now enable qbittorrent-nox.service
 
+apt -y autoremove
 reboot

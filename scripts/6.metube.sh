@@ -38,4 +38,6 @@ echo "## Running container"
     cd /mnt/metube
     docker-compose up -d
 
+apt -y autoremove
+
 reboot

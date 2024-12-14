@@ -33,4 +33,5 @@ echo "## Run AudioBookShelf"
 cd /mnt/audiobookshelf
 docker-compose up -d
 
+apt -y autoremove
 reboot

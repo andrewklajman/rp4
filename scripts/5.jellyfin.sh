@@ -21,4 +21,6 @@ echo "## Copy across configuration"
 tar -xvf jellyfin_config.tar.gz
 mv jellyfin/ /etc/
 
+apt -y autoremove
+
 reboot
