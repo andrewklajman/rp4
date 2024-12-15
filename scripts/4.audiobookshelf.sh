@@ -31,6 +31,7 @@ chown -R root:mnt_access /mnt
 
 echo "## Run AudioBookShelf"
 cd /mnt/audiobookshelf
+systemctl restart docker.service
 docker-compose up -d
 
 apt -y autoremove

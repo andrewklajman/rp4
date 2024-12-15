@@ -19,6 +19,7 @@ curl https://repo.jellyfin.org/install-debuntu.sh | bash
 
 echo "## Copy across configuration"
 tar -xvf jellyfin_config.tar.gz
+rm -r /etc/jellyfin
 mv jellyfin/ /etc/
 
 apt -y autoremove

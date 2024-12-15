@@ -31,14 +31,6 @@ echo "## Setup mnt access"
 groupadd mnt_access
 echo " - DISPLAY: $DISPLAY"
 
-echo "## Create SSL Certificate"
-mkdir /mnt/ssl
-openssl req -nodes -newkey rsa:2048 \
-	-keyout /mnt/ssl/ssl.key \
-	-out /mnt/ssl/cert.csr \
-	-subj "/C=AU/ST=Sydney/L=Sydney/O=Global Security/OU=IT Department/CN=andrewklajman.com"
-echo " - DISPLAY: $DISPLAY"
-
 echo "## Download and run get-docker script"
 curl -fsSL https://get.docker.com -o get-docker.sh
 bash get-docker.sh
