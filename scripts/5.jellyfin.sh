@@ -9,19 +9,20 @@ echo "## Notes
 echo "## Creating folders" | tee --append $LOG
 mkdir /mnt/jellyfin
 mkdir /mnt/jellyfin/movies
+mkdir /mnt/jellyfin/torrent
 chmod -R 775 /mnt
 chown -R root:mnt_access /mnt
 
 echo "## Installing Jellyfin" | tee --append $LOG
-apt -y update
-apt -y upgrade
 curl https://repo.jellyfin.org/install-debuntu.sh | bash
 
-echo "## Copy across configuration"
-tar -xvf jellyfin_config.tar.gz
-rm -r /etc/jellyfin
-mv jellyfin/ /etc/
+echo "## Only allow docker to run after mnt.service has run"
+sed 's/\[Unit\]/[Unit]\nAfter=mnt.mount\nRequires=mnt.mount/' /usr/lib/systemd/system/jellyfin.service > jellyfin.service.modified
+mv jellyfin.service.modified /usr/lib/systemd/system/jellyfin.service
 
-apt -y autoremove
 
-reboot
+#echo "## Copy across configuration"
+#tar -xvf ../files/jellyfin_config.tar.gz
+#rm -r /etc/jellyfin
+#mv jellyfin/ /etc/
+

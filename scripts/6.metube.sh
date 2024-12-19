@@ -50,7 +50,3 @@ echo "## Running container"
 cd /mnt/metube
 systemctl restart docker.service
 docker-compose up -d
-
-apt -y autoremove
-
-reboot

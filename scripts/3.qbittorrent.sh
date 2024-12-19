@@ -16,8 +16,6 @@ useradd \
 	torrent
 
 echo "## Install qbittorrent_nox"
-apt -y update
-apt -y upgrade
 apt-get -y install qbittorrent-nox
 
 echo "## Run program in background to generate configs"
@@ -33,7 +31,7 @@ mkdir /mnt/qbittorrent-nox
 mkdir /mnt/qbittorrent-nox/complete
 mkdir /mnt/qbittorrent-nox/incomplete
 mkdir /mnt/qbittorrent-nox/scripts
-cp ../files/torrent_finished.sh /mnt/qbitt0rrent-nox/scripts
+cp ../files/torrent_finished.sh /mnt/qbittorrent-nox/scripts
 chmod -R 775 /mnt
 chown -R root:mnt_access /mnt
 
@@ -42,6 +40,9 @@ echo "
 [Unit]
 Description=Qbittorrent Daemon
 After=nordvpnd.service
+Requires=nordvpnd.service
+After=mnt.mount
+Requires=mnt.mount
 
 [Service]
 ExecStart=/usr/bin/qbittorrent-nox
@@ -56,6 +57,3 @@ User=torrent
 WantedBy=default.target" > /etc/systemd/system/qbittorrent-nox.service
 
 systemctl --now enable qbittorrent-nox.service
-
-apt -y autoremove
-reboot
