@@ -1,31 +1,42 @@
-I would like to add the following
-- i need to remember to update the linux kernel to the latest
-- Create script to test hdd read and write
-- Use better WIFI connection
-    - My Wifi router will not work.
-    - Need to check my stuff at mums
+# NEXT TEXT
+- Confirm static IP is applied
+- Confirm tools are present
+- DONE Ensure that services only spin up when hdd is mounted.
+- DONE Jellyfin: Correction: /etc/jellyfin files were not being correctly copied accross before.  Ensure application starts
+- DONE SSH Forwarding: Turned off compression
+- DONE Browsers: Removed 7.browsers script (no longer needed)
+- DONE Squid Proxy: Implemented squid proxy
+
+# TODO: Immediate
 - external encrypted hdd
     * I need to register the speed of this
 - Tailscale
 - NginX Reverse Proxy on public IP
+    * Will need to setup a cloudflare connection
+- Use better WIFI connection
+    - My Wifi router will not work.
+    - Need to check my stuff at mums
 - Access to eReader
+- System Disk Encryption
+- zsh + completion
+- Send log files to git repository
+- Encrypting the System Drive.
 
-Note:
-- FOr odd reason if i place my external hdd in usb3 then wifi will not work
+# NOTE: 
+- For odd reason if i place my external hdd in usb3 then wifi will not work
 
-
-
-Maybe
-- update date and tie to sydney
+# TODO: A thought
+- Understand iproute, ifup, ifdown, iptables, ...
 - Implement a firewall: 
     * Is this needed with NordVpn?
     * I think it might interfere with Nordvpn maybe
-- Understand iproute, ifup, ifdown, iptables, ...
 - Pi DNS Server
     * Problem with this is that I would be useing the NordVPN DNS by default
     * However i could be setting my own DNS names
     * The problem that I have with this is that I understand that with nordvpnp you can override the DNS.  But I want to add to it.
-- Calibre
+
+NOTE NEEDED
+- Calibre: Just not sure if i really need this
 - quick image (dd version of bare, dd version of bare with nordvpn)
     * I tested this but really it does not work.  It takes n extramely long time to create the image and I would need to redo it each time i modify the script
 - Git repository
@@ -36,6 +47,7 @@ Maybe
 
 
 Done
+- i need to remember to update the linux kernel to the latest
 - set a static ip
 - external hdd
 - SSL Certificates
@@ -44,12 +56,14 @@ javascript:!function(){xhr=new XMLHttpRequest();xhr.open("POST","https://192.168
 - script to test connection speed
     * ./tools/speedtest.sh
 - Torrent Script to move to folder according to category
+- Tool: Create script to test hdd read and write
 
+## Disk performance with encrypted drive
 
-NEXT TEXT
-- Confirm static IP is applied
-- DONE Ensure that services only spin up when hdd is mounted.
-- DONE Jellyfin: Correction: /etc/jellyfin files were not being correctly copied accross before.  Ensure application starts
-- DONE SSH Forwarding: Turned off compression
-- DONE Browsers: Removed 7.browsers script (no longer needed)
-- DONE Squid Proxy: Implemented squid proxy
+On USB2 on RP4 unencrypted the R|W speed is 31.96 MB/sec | 65.1 MB/s. After encrypting the R|W speed is 23.59 MB/sec | 44.4 MB/s. 
+
+Comparatively it seems that the read speed does not really change.  but there is a approximate hit of 30% on the write speed.
+
+Nevertheless i will not be doing anythigntoo heavy so I will continue to impelmentat an encrypted drive.
+
+I should consider encrypting the system drive.

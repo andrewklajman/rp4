@@ -48,6 +48,7 @@ echo "rp4" > /tmp/raspi/etc/hostname
 # Copy setup.sh
 cp -r ../files/ /tmp/raspi/root
 cp -r ../scripts/ /tmp/raspi/root
+cp -r ../tools/ /tmp/raspi/root
 mkdir /tmp/raspi/root/log
 
 #echo "## Set timezone"
