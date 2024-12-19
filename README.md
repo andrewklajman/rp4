@@ -1,6 +1,7 @@
 # NEXT TEXT
 - Confirm static IP is applied
 - Confirm tools are present
+- Confirm encrypted HDD is applied
 - DONE Ensure that services only spin up when hdd is mounted.
 - DONE Jellyfin: Correction: /etc/jellyfin files were not being correctly copied accross before.  Ensure application starts
 - DONE SSH Forwarding: Turned off compression
@@ -8,8 +9,7 @@
 - DONE Squid Proxy: Implemented squid proxy
 
 # TODO: Immediate
-- external encrypted hdd
-    * I need to register the speed of this
+- Implement TinyProxy
 - Tailscale
 - NginX Reverse Proxy on public IP
     * Will need to setup a cloudflare connection
@@ -18,6 +18,7 @@
     - Need to check my stuff at mums
 - Access to eReader
 - System Disk Encryption
+    - This would only be practical if I could implement a key file
 - zsh + completion
 - Send log files to git repository
 - Encrypting the System Drive.
@@ -57,6 +58,10 @@ javascript:!function(){xhr=new XMLHttpRequest();xhr.open("POST","https://192.168
     * ./tools/speedtest.sh
 - Torrent Script to move to folder according to category
 - Tool: Create script to test hdd read and write
+- external encrypted hdd
+    * I need to register the speed of this
+    * Interestingly blkid does not show informationon a device that is encrypted
+    * I will try to just encrypt the partition
 
 ## Disk performance with encrypted drive
 
