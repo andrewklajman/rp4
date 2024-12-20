@@ -1,4 +1,5 @@
 # NEXT TEXT
+- Confirm that zsh is implementated
 - Confirm static IP is applied
 - Confirm tools are present
 - Confirm encrypted HDD is applied
@@ -10,7 +11,6 @@
 - DONE Squid Proxy: Implemented squid proxy
 
 # TODO: Immediate
-- Implement TinyProxy
 - Tailscale
 - NginX Reverse Proxy on public IP
     * Will need to setup a cloudflare connection
@@ -18,16 +18,15 @@
     - My Wifi router will not work.
     - Need to check my stuff at mums
 - Access to eReader
-- System Disk Encryption
-    - This would only be practical if I could implement a key file
-- zsh + completion
 - Send log files to git repository
-- Encrypting the System Drive.
 
 # NOTE: 
 - For odd reason if i place my external hdd in usb3 then wifi will not work
 
 # TODO: A thought
+- System Disk Encryption
+    - This would only be practical if I could implement a key file
+- Encrypting the System Drive.
 - Understand iproute, ifup, ifdown, iptables, ss (sockets),...
 - Implement a firewall: 
     * Is this needed with NordVpn?
@@ -48,7 +47,7 @@ NOTE NEEDED
 
 
 
-Done
+# DONE
 - i need to remember to update the linux kernel to the latest
 - set a static ip
 - external hdd
@@ -63,6 +62,8 @@ javascript:!function(){xhr=new XMLHttpRequest();xhr.open("POST","https://192.168
     * I need to register the speed of this
     * Interestingly blkid does not show informationon a device that is encrypted
     * I will try to just encrypt the partition
+- Implement TinyProxy
+- zsh + completion
 
 ## Disk performance with encrypted drive
 

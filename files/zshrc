@@ -1,0 +1,34 @@
+PS1="%n@%m:%1~# "
+
+alias ll='ls -lh --color=auto'
+alias lla='ls -lah --color=auto'
+alias grep='grep --color=auto'
+alias ec="$EDITOR $HOME/.zshrc" # edit .zshrc
+alias sc="source $HOME/.zshrc"  # reload zsh configuration
+
+bindkey -e
+bindkey '^ ' autosuggest-accept
+setopt histignorealldups sharehistory
+HISTSIZE=5000
+SAVEHIST=5000
+HISTFILE=~/.zsh_history
+
+autoload -Uz compinit
+compinit
+
+# zplug - manage plugins
+source /usr/share/zplug/init.zsh
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-completions"
+
+# zplug - install/load new plugins when zsh is started or reloaded
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load --verbose
