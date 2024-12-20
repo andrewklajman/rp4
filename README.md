@@ -1,4 +1,8 @@
 # NEXT TEXT
+- Drive is decrypted automatically
+- Latest kernel is found and installed
+
+
 - Confirm that zsh is implementated
 - Confirm static IP is applied
 - Confirm tools are present
@@ -11,6 +15,7 @@
 - DONE Squid Proxy: Implemented squid proxy
 
 # TODO: Immediate
+- Update script to only add directorys if they do not exist
 - Tailscale
 - NginX Reverse Proxy on public IP
     * Will need to setup a cloudflare connection

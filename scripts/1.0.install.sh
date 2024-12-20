@@ -28,11 +28,15 @@ echo "
 update_config=1
 ctrl_interface=DIR=/run/wpa_supplicant GROUP=netdev" >> /tmp/raspi/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 
+echo "
+nameserver 1.1.1.1
+" >> /tmp/raspi/etc/resolv.conf
+
 # SSH: Update config
 echo "PermitRootLogin yes" >> /tmp/raspi/etc/ssh/sshd_config
 echo "AddressFamily inet" >> /tmp/raspi/etc/ssh/sshd_config
 #sed 's/#Compression.*/Compression yes/g' /tmp/raspi/etc/ssh/sshd_config > /tmp/raspi/etc/ssh/sshd_config_modified
-mv /tmp/raspi/etc/ssh/sshd_config_modified /tmp/raspi/etc/ssh/sshd_config
+#mv /tmp/raspi/etc/ssh/sshd_config_modified /tmp/raspi/etc/ssh/sshd_config
 
 # SSH: Copy across public ssh key
 echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjb+t7vMFkoKa1q/RNrFtrp7RPcAgZLXC6WHIBIQL93 andrew@lenovo" >> /tmp/raspi/root/.ssh/authorized_keys
@@ -55,9 +59,13 @@ mkdir /tmp/raspi/root/log
 #rm /tmp/raspi/etc/localtime
 #ln -s /tmp/raspi/usr/share/zoneinfo/Australia/Sydney /tmp/raspi/etc/localtime
 
-# Create mount point for /mnt
+# Update crypttab and fstab
 echo "
-UUID=f8bc053b-7ecb-471f-af87-02c7dbba2f53 /mnt ext4 nofail,auto,x-systemd.device-timeout=30 0 2
+encrypted_hdd UUID=b22c292e-05f2-487a-a297-f20380b2f6dc /root/files/hdd.key luks
+" >> /tmp/raspi/etc/crypttab
+
+echo "
+/dev/mapper/encrypted_hdd /mnt ext4 nofail,auto,x-systemd.device-timeout=30 0 2
 " >> /tmp/raspi/etc/fstab
 
 # Umount image

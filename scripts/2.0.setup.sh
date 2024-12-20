@@ -1,15 +1,18 @@
 echo "# 2.setup.sh"
 
-echo "## Have you installed the latest kernel?"
-KERNEL_RECENT=$(apt-cache search linux-image-[0-9] | grep -v cloud | grep -v rt | grep -v unsigned | grep -v dbg | grep
--v headers | sort | tail -n1)
-echo "  - The most recent kernel package is $KERNEL_RECENT"
-read
+echo "## Update kernel"
+apt -y update
+KERNEL_RECENT=$( apt-cache search linux-image-[0-9] | grep -v cloud | grep -v rt | grep -v unsigned | grep -v dbg | grep -v headers | sort | tail -n1 | cut -d' ' -f1)
+apt-get -y install $KERNEL_RECENT
+apt -y upgrade
+
+echo "## Bring up encrypted drive"
+apt-get -y install cryptsetup
+cryptsetup luksOpen /dev/sda encrypted_hdd --key-file /root/files/hdd.key
+mount /mnt
 
 echo "## Install required applications"
-apt -y update
-apt -y upgrade
-apt-get -y install ranger neovim curl man doas htop ncdu yt-dlp
+apt-get -y install ranger neovim curl man doas htop ncdu yt-dlp zsh zplug
 
 echo "## Setup doas"
 echo "permit setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :root" > /etc/doas.conf
@@ -45,6 +48,10 @@ systemd daemon-reload
 
 echo "## Update  timezone"
 timedatectl set-timezone Australia/Sydney
+
+echo "## Zsh config"
+cp ../files/zshrc /root/.zshrc
+chsh -s /bin/zsh
 
 
 
