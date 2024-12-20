@@ -6,13 +6,12 @@ echo "## Notes:
   - https://github.com/containrrr/watchtower: recommended to overcome updated container images
   - Deatils about SSL generation
   			https://stackoverflow.com/questions/10175812/how-to-generate-a-self-signed-ssl-certificate-using-openssl#10176685
-
   "
 
 echo "## Creating folders"
-mkdir /mnt/metube
-mkdir /mnt/metube/downloads
-mkdir /mnt/metube/ssl
+[ -d "/mnt/metube/"  ] && mkdir /mnt/metube
+[ -d "/mnt/metube/downloads/"  ] && mkdir /mnt/metube/downloads
+[ -d "/mnt/metube/ssl/"  ] && mkdir /mnt/metube/ssl
 
 echo "## Creating SSL certificates"
 openssl req -nodes -x509 -newkey rsa:4096 \
@@ -43,8 +42,8 @@ echo "## Creating link to Jellyfin"
 if [ -d "/mnt/jellyfin" ]; then
 	ln -s /mnt/metube/downloads /mnt/jellyfin/metube
 fi
-chmod -R 775 /mnt
-chown -R root:mnt_access /mnt
+chmod -R 775 /mnt/metube
+chown -R root:mnt_access /mnt/metube
 
 echo "## Running container"
 cd /mnt/metube

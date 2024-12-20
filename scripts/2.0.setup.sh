@@ -1,10 +1,13 @@
 echo "# 2.setup.sh"
 
-echo "## Update kernel"
 apt -y update
 KERNEL_RECENT=$( apt-cache search linux-image-[0-9] | grep -v cloud | grep -v rt | grep -v unsigned | grep -v dbg | grep -v headers | sort | tail -n1 | cut -d' ' -f1)
-apt-get -y install $KERNEL_RECENT
+echo "## Update to kernel $KERNEL_RECENT"
+apt-get -y install $KERNEL_RECENT cryptsetup
 apt -y upgrade
+echo "You must reboot for new kernel to take effect"
+read
+
 
 echo "## Bring up encrypted drive"
 apt-get -y install cryptsetup

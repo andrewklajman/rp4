@@ -1,13 +1,13 @@
-# NEXT TEXT
-- Drive is decrypted automatically
-- Latest kernel is found and installed
-
-
-- Confirm that zsh is implementated
-- Confirm static IP is applied
-- Confirm tools are present
-- Confirm encrypted HDD is applied
-- Confirm that tinyproxy works
+# NEXT TEST
+- DONE Confirm that tinyproxy works
+    * Not working: I had implemented the wrong config (forgot "") and systemctl (incorrenct path) and the tinyproxy user must have access to the /mnt/tinyproxy folder
+    * Check again on next install
+- DONE: Confirm that zsh is implementated
+    * autocompletion: had to run each of the zplug commands
+- DONE Drive is decrypted automatically
+- DONE Confirm static IP is applied
+- DONE Confirm tools are present
+- DONE Latest kernel is found and installed
 - DONE Ensure that services only spin up when hdd is mounted.
 - DONE Jellyfin: Correction: /etc/jellyfin files were not being correctly copied accross before.  Ensure application starts
 - DONE SSH Forwarding: Turned off compression
@@ -16,6 +16,7 @@
 
 # TODO: Immediate
 - Update script to only add directorys if they do not exist
+- Update script to correctly apply chmod
 - Tailscale
 - NginX Reverse Proxy on public IP
     * Will need to setup a cloudflare connection
