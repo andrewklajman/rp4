@@ -2,6 +2,7 @@
 - Confirm static IP is applied
 - Confirm tools are present
 - Confirm encrypted HDD is applied
+- Confirm that tinyproxy works
 - DONE Ensure that services only spin up when hdd is mounted.
 - DONE Jellyfin: Correction: /etc/jellyfin files were not being correctly copied accross before.  Ensure application starts
 - DONE SSH Forwarding: Turned off compression
@@ -27,7 +28,7 @@
 - For odd reason if i place my external hdd in usb3 then wifi will not work
 
 # TODO: A thought
-- Understand iproute, ifup, ifdown, iptables, ...
+- Understand iproute, ifup, ifdown, iptables, ss (sockets),...
 - Implement a firewall: 
     * Is this needed with NordVpn?
     * I think it might interfere with Nordvpn maybe

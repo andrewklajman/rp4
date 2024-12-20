@@ -3,20 +3,14 @@ echo "# 2.1.externanal_hdd.sh"
 echo "## Install cryptsetup"
 apt-get -y install cryptsetup
 
-lsblk
-echo -n "Please confirm device: "
-read DEVICE
+#echo "## Create drive"
+#cryptsetup luksFormat $DEVICE --key-file $KEY_FILE
+#cryptsetup luksOpen $DEVICE external_hdd --key-file $KEY_FILE
+#mkfs.ext4 /dev/mapper/external_hdd
 
-KEY_FILE="/root/files/hdd.key"
-
-echo "## Create drive"
-cryptsetup luksFormat $DEVICE --key-file $KEY_FILE
-cryptsetup luksOpen $DEVICE external_hdd --key-file $KEY_FILE
-mkfs.ext4 /dev/mapper/external_hdd
-
-UUID=$(blkid | grep $DEVICE | cut -d' ' -f2)
+echo "## Update crypttab and fstab"
 echo "
-encrypted_hdd $UUID $KEY_FILE luks
+encrypted_hdd 7178a515-5b2e-45bb-a675-d16d54750190 /root/files/hdd.key luks
 " >> /etc/crypttab
 
 echo "
