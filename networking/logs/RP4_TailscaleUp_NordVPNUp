@@ -1,0 +1,81 @@
+# ip route list
+default via 192.168.0.1 dev wlan0 onlink 
+192.168.0.0/24 dev wlan0 proto kernel scope link src 192.168.0.214 
+
+
+# ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group 57841 qlen 1000
+    link/ether dc:a6:32:1b:06:b6 brd ff:ff:ff:ff:ff:ff
+    altname end0
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group 57841 qlen 1000
+    link/ether dc:a6:32:1b:06:b8 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.214/24 brd 192.168.0.255 scope global wlan0
+       valid_lft forever preferred_lft forever
+7: tailscale0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1280 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none 
+    inet 100.101.59.97/32 scope global tailscale0
+       valid_lft forever preferred_lft forever
+8: nordlynx: <POINTOPOINT,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/none 
+    inet 10.5.0.2/32 scope global nordlynx
+       valid_lft forever preferred_lft forever
+
+
+# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  192.168.0.0/24       anywhere             /* nordvpn */
+ACCEPT     all  --  192.168.0.0/24       anywhere             /* nordvpn */
+ACCEPT     all  --  anywhere             anywhere             connmark match  0xe1f1 /* nordvpn */
+ACCEPT     all  --  anywhere             anywhere             connmark match  0xe1f1 /* nordvpn */
+DROP       all  --  anywhere             anywhere             /* nordvpn */
+DROP       all  --  anywhere             anywhere             /* nordvpn */
+ts-input   all  --  anywhere             anywhere            
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             192.168.0.0/24       /* nordvpn */
+ACCEPT     all  --  anywhere             192.168.0.0/24       /* nordvpn */
+DROP       all  --  anywhere             anywhere             /* nordvpn */
+DROP       all  --  anywhere             anywhere             /* nordvpn */
+ts-forward  all  --  anywhere             anywhere            
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+DROP       tcp  --  anywhere             169.254.0.0/16       tcp dpt:domain /* nordvpn */
+DROP       udp  --  anywhere             169.254.0.0/16       udp dpt:domain /* nordvpn */
+DROP       tcp  --  anywhere             192.168.0.0/16       tcp dpt:domain /* nordvpn */
+DROP       udp  --  anywhere             192.168.0.0/16       udp dpt:domain /* nordvpn */
+DROP       tcp  --  anywhere             172.16.0.0/12        tcp dpt:domain /* nordvpn */
+DROP       udp  --  anywhere             172.16.0.0/12        udp dpt:domain /* nordvpn */
+DROP       tcp  --  anywhere             10.0.0.0/8           tcp dpt:domain /* nordvpn */
+DROP       udp  --  anywhere             10.0.0.0/8           udp dpt:domain /* nordvpn */
+ACCEPT     all  --  anywhere             192.168.0.0/24       /* nordvpn */
+ACCEPT     all  --  anywhere             192.168.0.0/24       /* nordvpn */
+CONNMARK   all  --  anywhere             anywhere             mark match 0xe1f1 /* nordvpn */ CONNMARK save
+ACCEPT     all  --  anywhere             anywhere             connmark match  0xe1f1 /* nordvpn */
+CONNMARK   all  --  anywhere             anywhere             mark match 0xe1f1 /* nordvpn */ CONNMARK save
+ACCEPT     all  --  anywhere             anywhere             connmark match  0xe1f1 /* nordvpn */
+DROP       all  --  anywhere             anywhere             /* nordvpn */
+DROP       all  --  anywhere             anywhere             /* nordvpn */
+
+Chain ts-forward (1 references)
+target     prot opt source               destination         
+MARK       all  --  anywhere             anywhere             MARK xset 0x40000/0xff0000
+ACCEPT     all  --  anywhere             anywhere             mark match 0x40000/0xff0000
+DROP       all  --  100.64.0.0/10        anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+
+Chain ts-input (1 references)
+target     prot opt source               destination         
+ACCEPT     all  --  100.101.59.97        anywhere            
+RETURN     all  --  100.115.92.0/23      anywhere            
+DROP       all  --  100.64.0.0/10        anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     udp  --  anywhere             anywhere             udp dpt:41641
+
+

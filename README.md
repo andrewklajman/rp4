@@ -1,4 +1,5 @@
 # NEXT TEST
+- Directories correctly permissions and do not override
 - DONE Confirm that tinyproxy works
     * Not working: I had implemented the wrong config (forgot "") and systemctl (incorrenct path) and the tinyproxy user must have access to the /mnt/tinyproxy folder
     * Check again on next install
@@ -15,9 +16,12 @@
 - DONE Squid Proxy: Implemented squid proxy
 
 # TODO: Immediate
-- Update script to only add directorys if they do not exist
-- Update script to correctly apply chmod
+- Fix up mkdir (are they even needed)
+- Cretae base image with nordvpn
+- Create dns for lenovo
 - Tailscale
+- Create Landing page
+- Add usergroups to each service
 - NginX Reverse Proxy on public IP
     * Will need to setup a cloudflare connection
 - Use better WIFI connection
@@ -42,7 +46,7 @@
     * However i could be setting my own DNS names
     * The problem that I have with this is that I understand that with nordvpnp you can override the DNS.  But I want to add to it.
 
-NOTE NEEDED
+# NOT NEEDED
 - Calibre: Just not sure if i really need this
 - quick image (dd version of bare, dd version of bare with nordvpn)
     * I tested this but really it does not work.  It takes n extramely long time to create the image and I would need to redo it each time i modify the script
@@ -54,6 +58,8 @@ NOTE NEEDED
 
 
 # DONE
+- Update script to only add directorys if they do not exist
+- Update script to correctly apply chmod
 - i need to remember to update the linux kernel to the latest
 - set a static ip
 - external hdd

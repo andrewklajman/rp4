@@ -27,10 +27,10 @@ echo "## Copy across configuration"
 cp ../files/qBittorrent.conf /home/torrent/.config/qBittorrent/
 	
 echo "## Create folders"
-[ -d "/mnt/qbitttorrent-nox/" ] && mkdir /mnt/qbittorrent-nox
-[ -d "/mnt/qbitttorrent-nox/complete/" ] && mkdir /mnt/qbittorrent-nox/complete
-[ -d "/mnt/qbitttorrent-nox/incomplete" ] && mkdir /mnt/qbittorrent-nox/incomplete
-[ -d "/mnt/qbitttorrent-nox/scripts" ] && mkdir /mnt/qbittorrent-nox/scripts
+mkdir /mnt/qbittorrent-nox
+mkdir /mnt/qbittorrent-nox/complete
+mkdir /mnt/qbittorrent-nox/incomplete
+mkdir /mnt/qbittorrent-nox/scripts
 cp ../files/torrent_finished.sh /mnt/qbittorrent-nox/scripts
 chmod -R 775 /mnt/qbittorrent-nox
 chown -R root:mnt_access /mnt/qbittorrent-nox

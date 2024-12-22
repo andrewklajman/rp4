@@ -1,4 +1,6 @@
 bash 2.0.setup.sh | tee --append $(date +../log/%F.log)
+bash 2.1.__tailscale.sh  | tee --append $(date +../log/%F.log)
+
 bash 3.0.qbittorrent.sh | tee --append $(date +../log/%F.log)
 bash 4.0.audiobookshelf.sh | tee --append $(date +../log/%F.log)
 bash 5.0.jellyfin.sh | tee --append $(date +../log/%F.log)

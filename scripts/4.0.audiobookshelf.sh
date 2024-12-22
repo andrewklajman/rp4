@@ -2,11 +2,11 @@ echo "# 4.audiobookshelf.sh"
 echo " - DISPLAY: $DISPLAY"
 
 echo "## Create folders"
-[ -d "/mnt/audiobookshelf/" ] && mkdir /mnt/audiobookshelf
-[ -d "/mnt/audiobookshelf/audiobooks" ] && mkdir /mnt/audiobookshelf/audiobooks
-[ -d "/mnt/audiobookshelf/podcasts" ] && mkdir /mnt/audiobookshelf/podcasts
-[ -d "/mnt/audiobookshelf/metadata" ] && mkdir /mnt/audiobookshelf/metadata
-[ -d "/mnt/audiobookshelf/config" ] && mkdir /mnt/audiobookshelf/config
+mkdir /mnt/audiobookshelf
+mkdir /mnt/audiobookshelf/audiobooks
+mkdir /mnt/audiobookshelf/podcasts
+mkdir /mnt/audiobookshelf/metadata
+mkdir /mnt/audiobookshelf/config
 
 echo "## Load configuration settings"
 tar -xvf ../files/audiobookshelf_config.tar.gz
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
 " > /mnt/audiobookshelf/docker-compose.yml
 chmod -R 775 /mnt/audiobookshelf
-chown -R root:mnt_access /mnt/audiobookshelf
+chown -R root:root /mnt/audiobookshelf
 
 echo "## Run AudioBookShelf"
 cd /mnt/audiobookshelf

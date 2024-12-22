@@ -7,9 +7,9 @@ echo "## Notes
 "
 
 echo "## Creating folders" | tee --append $LOG
-[ -d "/mnt/jellyfin/"  ] && mkdir /mnt/jellyfin
-[ -d "/mnt/jellyfin/movies/"  ] && mkdir /mnt/jellyfin/movies
-[ -d "/mnt/jellyfin/torrent/"  ] && mkdir /mnt/jellyfin/torrent
+mkdir /mnt/jellyfin
+mkdir /mnt/jellyfin/movies
+mkdir /mnt/jellyfin/torrent
 chmod -R 775 /mnt/jellyfin
 chown -R root:mnt_access /mnt/jellyfin
 

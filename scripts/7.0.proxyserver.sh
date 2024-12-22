@@ -30,8 +30,8 @@ LogFile "/mnt/tinyproxy/tinyproxy.log"
 LogLevel Info
 PidFile "/var/run/tinyproxy.pid"
 
-##Authentication
-BasicAuth tiny proxy
+###Authentication
+#BasicAuth tiny proxy
 
 ##HTTP Headers
 ViaProxyName "rp4"
@@ -47,10 +47,12 @@ MaxClients 100
 echo "
 [Unit]
 Description=Tinyproxy daemon
-Requires=network.target
 After=network.target
+Requires=network.target
 After=nordvpnd.service
 Requires=nordvpnd.service
+After=mnt.mount
+Requires=mnt.mount
 
 [Service]
 Type=forking

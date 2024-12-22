@@ -9,9 +9,9 @@ echo "## Notes:
   "
 
 echo "## Creating folders"
-[ -d "/mnt/metube/"  ] && mkdir /mnt/metube
-[ -d "/mnt/metube/downloads/"  ] && mkdir /mnt/metube/downloads
-[ -d "/mnt/metube/ssl/"  ] && mkdir /mnt/metube/ssl
+mkdir /mnt/metube
+mkdir /mnt/metube/downloads
+mkdir /mnt/metube/ssl
 
 echo "## Creating SSL certificates"
 openssl req -nodes -x509 -newkey rsa:4096 \

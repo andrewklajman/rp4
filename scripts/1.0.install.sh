@@ -7,6 +7,7 @@ read OUTPUT_DEV
 xzcat $IMAGE | doas dd of=$OUTPUT_DEV bs=64k oflag=dsync status=progress
 
 # Load image to tmp mount
+rm -r /tmp/raspi
 mkdir /tmp/raspi
 mount "$OUTPUT_DEV"2 /tmp/raspi
 
@@ -21,7 +22,7 @@ iface wlan0 inet static
   gateway 192.168.0.1
 wpa-conf /etc/wpa_supplicant/wpa_supplicant-wlan0.conf" > /tmp/raspi/etc/network/interfaces.d/wlan0
 
-wpa_passphrase Optus_C99CB5 hinds25536kr > /tmp/raspi/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+wpa_passphrase **SSID** **PASSWORD** > /tmp/raspi/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 chmod 0600 /tmp/raspi/etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 
 echo "
